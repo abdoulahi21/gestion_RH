@@ -20,17 +20,19 @@ class PermissionSeeder extends Seeder
             'manage-documents',
             'manage-absences',
             'manage-leave',
-            'view-statistics',
-            'view-historicals',
             'view-dashboard',
             'create-user',
             'edit-user',
             'delete-user',
-            'view-user',
-            'view-roles',
             'create-role',
             'edit-role',
             'delete-role',
+            'view-employees',
+            'view-contracts',
+            'view-talents',
+            'view-documents',
+            'view-absences',
+            'view-leave',
         ];
 
         // Looping and Inserting Array's Permissions into Permission Table
