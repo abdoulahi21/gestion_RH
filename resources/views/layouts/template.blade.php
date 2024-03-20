@@ -5,7 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin2 </title>
+    <title>Gestion RH</title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/png">
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/feather/feather.css">
     <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
@@ -35,7 +36,7 @@
             </div>
             <div>
                 <a class="navbar-brand brand-logo" href="index.html">
-                    <img src="images/logo.svg" alt="logo" />
+                    <img src="images/logo1.png" alt="logo" style="height: 100px;"/>
                 </a>
                 <a class="navbar-brand brand-logo-mini" href="index.html">
                     <img src="images/logo-mini.svg" alt="logo" />
@@ -45,7 +46,7 @@
         <div class="navbar-menu-wrapper d-flex align-items-top">
             <ul class="navbar-nav">
                 <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-                    <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">John Doe</span></h1>
+                    <h1 class="welcome-text">Good Morning, <span class="text-primary fw-bold">{{ Auth::user()->name }}</span></h1>
                     <h3 class="welcome-sub-text">Your performance summary this week </h3>
                 </li>
             </ul>
@@ -181,14 +182,17 @@
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                         <div class="dropdown-header text-center">
                             <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
-                            <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
-                            <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
+                            <p class="mb-1 mt-3 font-weight-semibold">{{ Auth::user()->name }}</p>
+                            <p class="fw-light text-muted mb-0">{{ Auth::user()->email }}</p>
                         </div>
                         <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
                         <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
                         <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
                         <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
-                        <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+                        <form method="post" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item" ><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</button>
+                        </form>
                     </div>
                 </li>
             </ul>
@@ -378,22 +382,22 @@
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item nav-category">UI Elements</li>
+                <li class="nav-item nav-category">Gestion</li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                         <i class="menu-icon mdi mdi-floor-plan"></i>
-                        <span class="menu-title">UI Elements</span>
+                        <span class="menu-title">Gestion Employees</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Listes Employees</a></li>
                             <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
                             <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item nav-category">Forms and Datas</li>
+                <li class="nav-item nav-category">Gestions des Contrats</li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
                         <i class="menu-icon mdi mdi-card-text-outline"></i>
@@ -446,12 +450,21 @@
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="menu-icon mdi mdi-account-circle-outline"></i>
-                        <span class="menu-title">User Pages</span>
+                        <span class="menu-title">Paramétrage</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="collapse" id="auth">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+                            @canany(['create-role', 'edit-role', 'delete-role'])
+                                <li class="nav-item"><a class="nav-link" href="{{ route('roles.index') }}">Gestion Roles</a></li>
+                            @endcanany
+                        </ul>
+                    </div>
+                    <div class="collapse" id="auth">
+                        <ul class="nav flex-column sub-menu">
+                            @canany(['create-user', 'edit-user', 'delete-user'])
+                                <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}">Gestion Users</a></li>
+                            @endcanany
                         </ul>
                     </div>
                 </li>
