@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Departement;
 use Illuminate\Http\Request;
 
 class DepartementController extends Controller
@@ -12,6 +13,8 @@ class DepartementController extends Controller
     public function index()
     {
         //
+        $departements = \App\Models\Departement::latest()->paginate(5);
+        return view('departement.index', compact('departements'));
     }
 
     /**
@@ -20,6 +23,7 @@ class DepartementController extends Controller
     public function create()
     {
         //
+        return view('departement.create');
     }
 
     /**
@@ -28,6 +32,13 @@ class DepartementController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nom' => 'required',
+            'description' => 'required',
+        ]);
+          Departement::create($request->all());
+        return redirect()->route('departement.index')
+            ->with('success', 'Departement created successfully.');
     }
 
     /**
@@ -44,6 +55,8 @@ class DepartementController extends Controller
     public function edit(string $id)
     {
         //
+        $departement = \App\Models\Departement::find($id);
+        return view('departement.edit', compact('departement'));
     }
 
     /**
@@ -60,5 +73,8 @@ class DepartementController extends Controller
     public function destroy(string $id)
     {
         //
+        Departement::find($id)->delete();
+        return redirect()->route('departement.index')
+            ->with('success', 'Departement deleted successfully');
     }
 }

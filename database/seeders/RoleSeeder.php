@@ -31,6 +31,9 @@ class RoleSeeder extends Seeder
             'create-role',
             'edit-role',
             'delete-role',
+            'manage-departement',
+            'manage-poste',
+            'manage-conge',
         ]);
 
         $gestionnaires->givePermissionTo([
@@ -41,7 +44,9 @@ class RoleSeeder extends Seeder
             'manage-documents',
             'manage-absences',
             'manage-leave',
-
+            'manage-departement',
+            'manage-poste',
+            'manage-conge',
         ]);
 
         $utilisateurs->givePermissionTo([
@@ -51,6 +56,9 @@ class RoleSeeder extends Seeder
             'view-documents',
             'view-absences',
             'view-leave',
+            'view-departement',
+            'view-poste',
+            'view-conge',
         ]);
     }
 }

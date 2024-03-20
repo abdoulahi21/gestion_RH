@@ -14,6 +14,9 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
+            'manage-departement',
+            'manage-poste',
+            'manage-conge',
             'manage-employees',
             'manage-contracts',
             'manage-talents',
@@ -33,6 +36,9 @@ class PermissionSeeder extends Seeder
             'view-documents',
             'view-absences',
             'view-leave',
+            'view-departement',
+            'view-poste',
+            'view-conge',
         ];
 
         // Looping and Inserting Array's Permissions into Permission Table

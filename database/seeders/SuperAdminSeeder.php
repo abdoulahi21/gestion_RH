@@ -22,6 +22,12 @@ class SuperAdminSeeder extends Seeder
         ]);
         $administrateur->assignRole('Administrateurs');
 
+        $gestionnaires = User::create([
+            'name' => 'samba',
+            'email' => 'samba@gmail.com',
+            'password' => Hash::make('samba1234')
+        ]);
+        $gestionnaires->assignRole('Gestionnaires');
         // Creating Admin User
         $utilisateurs = User::create([
             'name' => 'Sembene',
@@ -30,12 +36,5 @@ class SuperAdminSeeder extends Seeder
         ]);
         $utilisateurs->assignRole('Utilisateurs');
 
-        // Creating Product Manager User
-        $gestionnaires = User::create([
-            'name' => 'samba',
-            'email' => 'samba@gmail.com',
-            'password' => Hash::make('samba1234')
-        ]);
-        $gestionnaires->assignRole('Gestionnaires');
     }
 }
