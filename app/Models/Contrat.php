@@ -5,27 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EmployeeTalent extends Model
+class Contrat extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'user_id',
-        'langue',
-        'skill',
-        'certification'
+        'type_contrats',
+        'date_debut',
+        'date_fin',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
-    public function getUserNameAttribute()
-    {
-        return $this->user->name;
-    }
-
-
-
 
 }

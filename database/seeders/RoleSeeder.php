@@ -13,11 +13,13 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $administrateur= Role::create(['name' => 'Administrateurs']);
+         $administrateurs=Role::create(['name' => 'Administrateurs']);
         $gestionnaires = Role::create(['name' => 'Gestionnaires']);
-        $utilisateurs = Role::create(['name' => ' Utilisateurs']);
-
-        $administrateur->givePermissionTo([
+        $employees = Role::create(['name' => 'employees']);
+        $administrateurs->givePermissionTo([
+            'manage-departement',
+            'manage-poste',
+            'manage-conge',
             'manage-employees',
             'manage-contracts',
             'manage-talents',
@@ -31,11 +33,16 @@ class RoleSeeder extends Seeder
             'create-role',
             'edit-role',
             'delete-role',
-            'manage-departement',
-            'manage-poste',
-            'manage-conge',
+            'view-employees',
+            'view-contracts',
+            'view-talents',
+            'view-documents',
+            'view-absences',
+            'view-leave',
+            'view-departement',
+            'view-poste',
+            'view-conge',
         ]);
-
         $gestionnaires->givePermissionTo([
             'view-dashboard',
             'manage-employees',
@@ -49,7 +56,7 @@ class RoleSeeder extends Seeder
             'manage-conge',
         ]);
 
-        $utilisateurs->givePermissionTo([
+        $employees->givePermissionTo([
             'view-employees',
             'view-contracts',
             'view-talents',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contrat;
 use Illuminate\Http\Request;
 
 class ContratController extends Controller
@@ -12,6 +13,9 @@ class ContratController extends Controller
     public function index()
     {
         //
+
+        $contrats = Contrat::latest()->paginate(5);
+        return view('contrat.index', compact('contrats'));
     }
 
     /**
@@ -20,6 +24,7 @@ class ContratController extends Controller
     public function create()
     {
         //
+        return view('contrat.create');
     }
 
     /**
@@ -28,6 +33,17 @@ class ContratController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'user_id' => 'required',
+            'type_contrats' => 'required',
+            'date_debut' => 'required',
+            'date_fin' => 'required',
+        ]);
+
+        Contrat::create($request->all());
+
+        return redirect()->route('contrat.index')
+            ->with('success', 'Contrat created successfully.');
     }
 
     /**
@@ -36,6 +52,9 @@ class ContratController extends Controller
     public function show(string $id)
     {
         //
+
+        $contrat = Contrat::find($id);
+        return redirect()->route('contrat.show', compact('contrat'));
     }
 
     /**
@@ -44,6 +63,7 @@ class ContratController extends Controller
     public function edit(string $id)
     {
         //
+
     }
 
     /**

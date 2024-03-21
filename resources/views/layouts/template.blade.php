@@ -22,7 +22,6 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="{{asset('css/vertical-layout-light/style.css')}}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" />
 </head>
 <body>
 <div class="container-scroller">
@@ -46,8 +45,8 @@
         <div class="navbar-menu-wrapper d-flex align-items-top">
             <ul class="navbar-nav">
                 <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-                    <h1 class="welcome-text">Good Morning, <span class="text-primary fw-bold">{{ Auth::user()->name }}</span></h1>
-                    <h3 class="welcome-sub-text">Your performance summary this week </h3>
+                    <h1 class="welcome-text">Hello!<span class="text-primary fw-bold">{{ Auth::user()->name }}</span></h1>
+                    <h3 class="welcome-sub-text"> </h3>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
@@ -395,10 +394,13 @@
                             <li class="nav-item"> <a class="nav-link" href="{{route('employee.index')}}">Listes Employees</a></li>
                             @endcanany
                             @canany(['manage-departement','view-departement'])
-                                <li class="nav-item"><a class="nav-link" href="{{ route('departement.index') }}">Departement</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('departement.index') }}">Departements</a></li>
                             @endcanany
                             @canany(['manage-poste','view-poste'])
                                 <li class="nav-item"><a class="nav-link" href="{{ route('poste.index') }}">Postes</a></li>
+                            @endcanany
+                            @canany(['manage-contracts','view-contracts'])
+                                <li class="nav-item"><a class="nav-link" href="{{ route('contrat.index') }}">Contrats</a></li>
                             @endcanany
                         </ul>
                     </div>

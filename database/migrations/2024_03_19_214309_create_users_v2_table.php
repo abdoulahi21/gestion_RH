@@ -20,7 +20,6 @@ return new class extends Migration
            $table->string('situation_matrimoniale')->nullable();
            $table->string('nombre_enfants')->nullable();
            $table->string('nationalite')->nullable();
-
         });
     }
 

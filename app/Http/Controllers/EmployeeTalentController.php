@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\EmployeeTalent;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 
 class EmployeeTalentController extends Controller
@@ -13,6 +15,9 @@ class EmployeeTalentController extends Controller
     public function index()
     {
         //
+        $users = User::all();
+        return view('employee.index',
+        );
     }
 
     /**
@@ -20,7 +25,11 @@ class EmployeeTalentController extends Controller
      */
     public function create()
     {
-        //
+        //je veux recuoerer la liste des utilisateurs qui ont comme role Utilisateurs
+        $users = User::role('employees')->get();
+        return view('employee.create',
+        compact('users')
+        );
     }
 
     /**
@@ -29,7 +38,15 @@ class EmployeeTalentController extends Controller
     public function store(Request $request)
     {
         //
-
+        $request->validate([
+            'user_id' => 'required',
+            'langue' => 'required',
+            'skill' => 'required',
+            'certification' => 'required',
+        ]);
+        EmployeeTalent::create($request->all());
+        return redirect()->route('employee.index')
+            ->with('success', 'EmployeeTalent created successfully.');
     }
 
     /**

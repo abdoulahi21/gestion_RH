@@ -22,6 +22,15 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'adresse',
+        'telephone',
+        'date_naissance',
+        'lieu_naissance',
+        'sexe',
+        'situation_matrimoniale',
+        'nombre_enfants',
+        'nationalite',
+
     ];
 
     /**
@@ -43,4 +52,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function contrats()
+    {
+        return $this->hasMany(Contrat::class);
+    }
+
 }

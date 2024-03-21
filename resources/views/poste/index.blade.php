@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('container')
-    <div class="container">
+    <div class="container m-lg-5">
         <div class="card shadow-lg p-3 mb-5 bg-body-tertiary mt-5 ">
             <div class="card-header">Postes List</div>
             <div class="card-body">

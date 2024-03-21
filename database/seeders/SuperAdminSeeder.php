@@ -16,25 +16,53 @@ class SuperAdminSeeder extends Seeder
     {
         // Creating Super Admin User
         $administrateur = User::create([
-            'name' => 'abdoulahi',
+            'name' => 'abdoulahi Diallo',
             'email' => 'abdou@gmail.com',
-            'password' => Hash::make('abdou1234')
+            'password' => Hash::make('abdou1234'),
+            'date_naissance' => '2000-21-06',
+            'adresse' => 'Dakar',
+            'telephone' => '778888888',
+            'sexe' => 'Homme',
+            'situation_matrimoniale' => 'Celibataire',
+            'nationalite' => 'Senegalais',
+            'numero_identite' => '123456789',
+            'lieu_naissance' => 'Dakar',
+
+
+
         ]);
         $administrateur->assignRole('Administrateurs');
 
         $gestionnaires = User::create([
-            'name' => 'samba',
+            'name' => 'samba Diouf',
             'email' => 'samba@gmail.com',
-            'password' => Hash::make('samba1234')
+            'password' => Hash::make('samba1234'),
+            'date_naissance' => '2000-21-06',
+            'adresse' => 'Dakar',
+            'telephone' => '778888888',
+            'sexe' => 'Homme',
+            'situation_matrimoniale' => 'Celibataire',
+            'nationalite' => 'Senegalais',
+            'numero_identite' => '123456789',
+            'lieu_naissance' => 'Dakar',
+
         ]);
         $gestionnaires->assignRole('Gestionnaires');
         // Creating Admin User
-        $utilisateurs = User::create([
-            'name' => 'Sembene',
+        $employees = User::create([
+            'name' => ' Pape BirameSembene',
             'email' => 'sembene@gmail.com',
-            'password' => Hash::make('sembene1234')
+            'password' => Hash::make('sembene1234'),
+            'date_naissance' => '1998-12-12',
+            'adresse' => 'Dakar',
+            'telephone' => '778888888',
+            'sexe' => 'Homme',
+            'situation_matrimoniale' => 'Celibataire',
+            'nationalite' => 'Senegalais',
+            'numero_identite' => '123456789',
+            'lieu_naissance' => 'Dakar',
         ]);
-        $utilisateurs->assignRole('Utilisateurs');
+        $employees->assignRole('employees');
 
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('container')
-    <div class="container m-lg-2">
+    <div class="container m-lg-5">
         <div class="card mt-5">
             <div class="card-header">Manage Users</div>
             <div class="card-body">

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('historiques', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('types_actions');
             $table->string('date_actions');
             $table->timestamps();
