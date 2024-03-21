@@ -25,7 +25,7 @@
                                     @csrf
                                     @method('DELETE')
 
-                                    <a href="{{ route('roles.show', $role->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-eye"></i> Show</a>
+                                    <a href="{{ route('roles.show', $role->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> Show</a>
 
                                     @if ($role->name!='Administrateurs')
                                         @can('edit-role')

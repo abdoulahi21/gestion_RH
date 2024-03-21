@@ -397,7 +397,9 @@
                             @canany(['manage-departement','view-departement'])
                                 <li class="nav-item"><a class="nav-link" href="{{ route('departement.index') }}">Departement</a></li>
                             @endcanany
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                            @canany(['manage-poste','view-poste'])
+                                <li class="nav-item"><a class="nav-link" href="{{ route('poste.index') }}">Postes</a></li>
+                            @endcanany
                         </ul>
                     </div>
                 </li>

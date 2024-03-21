@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Poste;
 use Illuminate\Http\Request;
 
 class PosteController extends Controller
@@ -12,6 +13,8 @@ class PosteController extends Controller
     public function index()
     {
         //
+        $postes = Poste::latest()->paginate(5);
+        return view('poste.index', compact('postes'));
     }
 
     /**
@@ -20,6 +23,8 @@ class PosteController extends Controller
     public function create()
     {
         //
+        $departements = \App\Models\Departement::all();
+        return view('poste.create', compact('departements'));
     }
 
     /**
@@ -28,6 +33,14 @@ class PosteController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nom' => 'required',
+            'description' => 'required',
+            'departement_id' => 'required',
+        ]);
+        Poste::create($request->all());
+        return redirect()->route('poste.index')
+            ->with('success', 'Poste created successfully.');
     }
 
     /**
@@ -44,6 +57,9 @@ class PosteController extends Controller
     public function edit(string $id)
     {
         //
+        $departements = \App\Models\Departement::all();
+        $postes=Poste::find($id);
+        return view('poste.edit',compact('departements','postes'));
     }
 
     /**
@@ -52,6 +68,14 @@ class PosteController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'nom' => 'required',
+            'description' => 'required',
+            'departement_id' => 'required',
+        ]);
+        Poste::find($id)->update($request->all());
+        return view('poste.index')
+            ->with('success', 'Poste updated successfully.');
     }
 
     /**
@@ -60,5 +84,8 @@ class PosteController extends Controller
     public function destroy(string $id)
     {
         //
+        Poste::find($id)->delete();
+        return redirect()->route('poste.index')
+            ->with('success', 'Departement deleted successfully');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmployeeTalent;
 use Illuminate\Http\Request;
 
 class EmployeeTalentController extends Controller
@@ -12,7 +13,6 @@ class EmployeeTalentController extends Controller
     public function index()
     {
         //
-        return view('employee.index');
     }
 
     /**
@@ -29,6 +29,7 @@ class EmployeeTalentController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**
