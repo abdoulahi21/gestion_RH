@@ -13,8 +13,9 @@ class CongeController extends Controller
      */
     public function index()
     {
-        //
-        $conges=Conge::latest()->paginate(5);
+        //je veux voir uniquement les conges de l'utilisateur connect
+         //$conges=Conge::where('user_id',auth()->user()->id)->latest()->paginate(5);
+         $conges=Conge::latest()->paginate(5);
         return view('conge.index',compact('conges'));
     }
 
@@ -39,10 +40,14 @@ class CongeController extends Controller
             'date_debut' => 'required',
             'date_fin' => 'required',
             'type_conge' => 'required',
-            'status' => 'required',
         ]);
-
-        Conge::create($request->all());
+        $conge=new Conge();
+        $conge->user_id=$request->user_id;
+        $conge->date_debut=$request->date_debut;
+        $conge->date_fin=$request->date_fin;
+        $conge->type_conge=$request->type_conge;
+        $conge->status="En attente";
+        $conge->save();
         return redirect()->route('conge.index')
             ->with('success', 'Conge created successfully.');
     }
@@ -97,4 +102,22 @@ class CongeController extends Controller
         return redirect()->route('conge.index')
             ->with('success', 'Conge deleted successfully');
     }
+     public function accept(string $id)
+     {
+         //
+         $conge = Conge::find($id);
+         $conge->status = "Accepter";
+         $conge->save();
+         return redirect()->route('conge.index')
+             ->with('success', 'Conge accepted successfully');
+     }
+        public function refuse(string $id)
+        {
+            //
+            $conge = Conge::find($id);
+            $conge->status = "Refuser";
+            $conge->save();
+            return redirect()->route('conge.index')
+                ->with('success', 'Conge refused successfully');
+        }
 }

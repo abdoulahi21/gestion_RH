@@ -30,7 +30,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Type</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control" name="type_conges">
+                                    <select class="form-control" name="type_conge">
                                         <option>Maladie</option>
                                         <option>CDD</option>
                                         <option>Prestation de service</option>

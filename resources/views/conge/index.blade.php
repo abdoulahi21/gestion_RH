@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('container')
-    <div class="container m-lg-5">
+    <div class="container m-lg-4">
         <div class="card shadow-lg p-3 mb-5 bg-body-tertiary mt-5 ">
             <div class="card-header">Conge List</div>
             <div class="card-body">
@@ -14,7 +14,7 @@
                         <th>Date debut</th>
                         <th>Date fin</th>
                         <th>Status</th>
-                        <th>Actions</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -22,19 +22,15 @@
                         <tr>
                             <td>{{$conge->id}}</td>
                             <td>{{$conge->user->name}}</td>
-                            <td>{{$conge->type_contrats}}</td>
+                            <td>{{$conge->type_conge}}</td>
                             <td>{{$conge->date_debut}}</td>
                             <td>{{$conge->date_fin}}</td>
                             <td>{{$conge->status}}</td>
                             <td>
-                                <form action="{{ route('contrat.destroy', $conge->id) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    @can('manage-leave')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this product?');"><i class="bi bi-trash"></i> Delete</button>
-                                    @endcan
-                                    <a href="{{ route('conge.edit', $conge->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-eye"></i> Edit</a>
-                                </form>
+                                @if($conge->status == 'En attente')
+                                    <a href="{{ route('conge.accept', $conge->id) }}" class="btn btn-warning btn-sm">Valider</a>
+                                    <a href="{{ route('conge.refuse', $conge->id) }}" class="btn btn-danger btn-sm">Refuser</a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
