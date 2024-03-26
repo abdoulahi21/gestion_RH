@@ -17,7 +17,25 @@
                     </tr>
                     </thead>
                     <tbody>
-
+                       @foreach($contrats as $contrat)
+                           <tr>
+                               <td>{{$contrat->id}}</td>
+                               <td>{{$contrat->user->name}}</td>
+                               <td>{{$contrat->type_contrats}}</td>
+                               <td>{{$contrat->date_debut}}</td>
+                               <td>{{$contrat->date_fin}}</td>
+                               <td>
+                                   <form action="{{ route('contrat.destroy', $contrat->id) }}" method="post">
+                                       @csrf
+                                       @method('DELETE')
+                                       @can('manage-contracts')
+                                           <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this product?');"><i class="bi bi-trash"></i> Delete</button>
+                                       @endcan
+                                       <a href="{{ route('contrat.edit', $contrat->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-eye"></i> Edit</a>
+                                   </form>
+                               </td>
+                           </tr>
+                       @endforeach
                     </tbody>
                 </table>
             </div>

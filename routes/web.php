@@ -32,4 +32,6 @@ Route::resources([
     'employee'=>\App\Http\Controllers\EmployeeTalentController::class,
     'poste'=>\App\Http\Controllers\PosteController::class,
     'contrat'=>\App\Http\Controllers\ContratController::class,
+    'conge'=>\App\Http\Controllers\CongeController::class,
+    'absence'=>\App\Http\Controllers\AbsenceController::class,
 ]);

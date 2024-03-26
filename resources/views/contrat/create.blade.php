@@ -11,26 +11,26 @@
             </div>
         </div>
         <div class="card-body">
-            <form class="form-sample">
+            <form class="form-sample" method="post" action="{{route('contrat.store')}}">
+                @csrf
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Employee</label>
+                            <label class="col-sm-4 col-form-label">Employee</label>
                             <div class="col-sm-9">
-                                 <select class="form-control">
-                                    <option>Employee 1</option>
-                                    <option>Employee 2</option>
-                                    <option>Employee 3</option>
-                                    <option>Employee 4</option>
-                                 </select>
+                                <select class="form-control" name="user_id">
+                                    @foreach($users as $user)
+                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Type</label>
+                            <label class="col-sm-4 col-form-label">Type</label>
                             <div class="col-sm-9">
-                               <select class="form-control">
+                               <select class="form-control" name="type_contrats">
                                     <option>CDI</option>
                                     <option>CDD</option>
                                     <option>Prestation de service</option>
@@ -43,9 +43,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Debut</label>
+                            <label class="col-sm-4 col-form-label">Debut</label>
                             <div class="col-sm-9">
-                                <input type="date" class="form-control @error('') is-invalid @enderror" name="">
+                                <input type="date" class="form-control @error('') is-invalid @enderror" name="date_debut">
                                 @if ($errors->has(''))
                                     <span class="text-danger">{{ $errors->first('skill')}}</span>
                                 @endif
@@ -54,12 +54,15 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Fin</label>
+                            <label class="col-sm-4 col-form-label">Fin</label>
                             <div class="col-sm-9">
-                                <input type="date" class="form-control" />
+                                <input type="date" class="form-control" name="date_fin"/>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="mb-3 row">
+                    <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Add Contrat">
                 </div>
             </form>
         </div>

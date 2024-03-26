@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contrat;
+use App\Models\Absence;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class ContratController extends Controller
+class AbsenceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class ContratController extends Controller
     public function index()
     {
         //
-        $contrats = Contrat::latest()->paginate(5);
-        return view('contrat.index', compact('contrats'));
+        $absences=Absence::all();
+        return view('absence.index',compact('absences'));
     }
 
     /**
@@ -24,8 +24,8 @@ class ContratController extends Controller
     public function create()
     {
         //
-        $users = User::role('employees')->get();
-        return view('contrat.create',compact('users'));
+        $users=User::role('employees')->get();
+        return view('absence.create',compact('users'));
     }
 
     /**
@@ -36,14 +36,14 @@ class ContratController extends Controller
         //
         $request->validate([
             'user_id' => 'required',
-            'type_contrats' => 'required',
             'date_debut' => 'required',
             'date_fin' => 'required',
+            'type_absences' => 'required',
         ]);
+        Absence::create($request->all());
+        return redirect()->route('absence.index')
+            ->with('success', 'Conge created successfully.');
 
-        Contrat::create($request->all());
-        return redirect()->route('contrat.index')
-            ->with('success', 'Contrat created successfully.');
     }
 
     /**
@@ -52,9 +52,6 @@ class ContratController extends Controller
     public function show(string $id)
     {
         //
-
-        $contrat = Contrat::find($id);
-        return redirect()->route('contrat.show', compact('contrat'));
     }
 
     /**
@@ -63,10 +60,11 @@ class ContratController extends Controller
     public function edit(string $id)
     {
         //
-       return view('contrat.edit', [
-            'contrat' => Contrat::find($id),
+        return view('absence.edit', [
+            'absence' => Absence::find($id),
             'users' => User::role('employees')->get()
         ]);
+
     }
 
     /**
@@ -77,14 +75,13 @@ class ContratController extends Controller
         //
         $request->validate([
             'user_id' => 'required',
-            'type_contrats' => 'required',
             'date_debut' => 'required',
             'date_fin' => 'required',
+            'type_absences' => 'required',
         ]);
-
-        Contrat::find($id)->update($request->all());
-        return redirect()->route('contrat.index')
-            ->with('success', 'Contrat updated successfully');
+        Absence::find($id)->update($request->all());
+        return redirect()->route('absence.index')
+            ->with('success', 'Absence updated successfully.');
     }
 
     /**
@@ -93,8 +90,9 @@ class ContratController extends Controller
     public function destroy(string $id)
     {
         //
-        Contrat::find($id)->delete();
-        return redirect()->route('contrat.index')
-            ->with('success', 'Contrat deleted successfully');
+        $absence = Absence::find($id);
+        $absence->delete();
+        return redirect()->route('absence.index')
+            ->with('success', 'Absence deleted successfully.');
     }
 }

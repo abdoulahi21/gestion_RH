@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -27,9 +26,6 @@ class SuperAdminSeeder extends Seeder
             'nationalite' => 'Senegalais',
             'numero_identite' => '123456789',
             'lieu_naissance' => 'Dakar',
-
-
-
         ]);
         $administrateur->assignRole('Administrateurs');
 
@@ -45,7 +41,6 @@ class SuperAdminSeeder extends Seeder
             'nationalite' => 'Senegalais',
             'numero_identite' => '123456789',
             'lieu_naissance' => 'Dakar',
-
         ]);
         $gestionnaires->assignRole('Gestionnaires');
         // Creating Admin User
@@ -63,6 +58,5 @@ class SuperAdminSeeder extends Seeder
             'lieu_naissance' => 'Dakar',
         ]);
         $employees->assignRole('employees');
-
     }
 }

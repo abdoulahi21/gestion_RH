@@ -5,21 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EmployeeTalent extends Model
+class Absence extends Model
 {
     use HasFactory;
-    protected $fillable = [
+    protected $fillable=[
         'user_id',
-        'langue',
-        'skill',
-        'certification'
+        'date_debut',
+        'date_fin',
+        'type_absences',
     ];
-
-    public function user()
-    {
+    public function user(){
         return $this->belongsTo(User::class);
     }
-
 
 
 

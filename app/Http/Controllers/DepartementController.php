@@ -65,6 +65,13 @@ class DepartementController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'nom' => 'required',
+            'description' => 'required',
+        ]);
+        Departement::find($id)->update($request->all());
+        return redirect()->route('departement.index')
+            ->with('success', 'Departement updated successfully');
     }
 
     /**

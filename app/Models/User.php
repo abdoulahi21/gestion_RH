@@ -30,6 +30,7 @@ class User extends Authenticatable
         'situation_matrimoniale',
         'nombre_enfants',
         'nationalite',
+        'numero_identite',
 
     ];
 
@@ -56,6 +57,18 @@ class User extends Authenticatable
     public function contrats()
     {
         return $this->hasMany(Contrat::class);
+    }
+    public function employee()
+    {
+        return $this->hasMany(EmployeeTalent::class);
+    }
+    public function conge()
+    {
+        return $this->hasMany(Conge::class);
+    }
+    public function absence()
+    {
+        return $this->hasMany(Absence::class);
     }
 
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conge;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CongeController extends Controller
@@ -12,6 +14,8 @@ class CongeController extends Controller
     public function index()
     {
         //
+        $conges=Conge::latest()->paginate(5);
+        return view('conge.index',compact('conges'));
     }
 
     /**
@@ -20,6 +24,8 @@ class CongeController extends Controller
     public function create()
     {
         //
+        $users = User::role('employees')->get();
+        return view('conge.create',compact('users'));
     }
 
     /**
@@ -28,6 +34,17 @@ class CongeController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'user_id' => 'required',
+            'date_debut' => 'required',
+            'date_fin' => 'required',
+            'type_conge' => 'required',
+            'status' => 'required',
+        ]);
+
+        Conge::create($request->all());
+        return redirect()->route('conge.index')
+            ->with('success', 'Conge created successfully.');
     }
 
     /**
@@ -44,6 +61,10 @@ class CongeController extends Controller
     public function edit(string $id)
     {
         //
+        return view('conge.edit', [
+            'conge' => Conge::find($id),
+            'users' => User::role('employees')->get()
+        ]);
     }
 
     /**
@@ -52,6 +73,17 @@ class CongeController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'user_id' => 'required',
+            'date_debut' => 'required',
+            'date_fin' => 'required',
+            'type_conge' => 'required',
+            'status' => 'required',
+        ]);
+
+        Conge::find($id)->update($request->all());
+        return redirect()->route('conge.index')
+            ->with('success', 'Conge updated successfully');
     }
 
     /**
@@ -60,5 +92,9 @@ class CongeController extends Controller
     public function destroy(string $id)
     {
         //
+        $conge = Conge::find($id);
+        $conge->delete();
+        return redirect()->route('conge.index')
+            ->with('success', 'Conge deleted successfully');
     }
 }

@@ -1,8 +1,8 @@
 @extends('layouts.template')
 @section('container')
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+    <div class="container m-lg-5">
+        <div class="">
+            <div class="card mt-5" >
                 <div class="card-header">
                     <div class="float-start">
                         Add New Role

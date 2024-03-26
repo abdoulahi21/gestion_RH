@@ -25,7 +25,16 @@ class StoreUserRequest extends FormRequest
             'name' => 'required|string|max:250',
             'email' => 'required|string|email:rfc,dns|max:250|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
-            'roles' => 'required'
+            'roles' => 'required',
+            'adresse'=> 'required|string|max:250',
+            'telephone'=> 'required|string|max:250',
+            'date_naissance'=> 'required|date',
+            'lieu_naissance'=> 'required|string|max:250',
+            'sexe'=> 'required|string|max:250',
+            'situation_matrimoniale'=> 'required|string|max:250',
+            'nombre_enfants'=> 'required|integer',
+            'nationalite'=> 'required|string|max:250',
+            'numero_identite'=> 'required|string|max:250',
         ];
     }
 }
