@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Conge;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class CongeController extends Controller
 {
@@ -13,10 +14,15 @@ class CongeController extends Controller
      */
     public function index()
     {
-        //je veux voir uniquement les conges de l'utilisateur connect
-         //$conges=Conge::where('user_id',auth()->user()->id)->latest()->paginate(5);
-         $conges=Conge::latest()->paginate(5);
-        return view('conge.index',compact('conges'));
+          $roles = Role::all();
+          if (auth()->user()->hasRole('Administrateurs')) {
+              $conges = Conge::latest()->paginate(5);
+          } elseif (auth()->user()->hasRole('Gestionnaires')) {
+              $conges = Conge::latest()->paginate(5);
+          } elseif (auth()->user()->hasRole('employees')) {
+              $conges = Conge::where('user_id', auth()->user()->id)->latest()->paginate(5);
+          }
+        return view('conge.index',compact('conges'),compact('roles'));
     }
 
     /**

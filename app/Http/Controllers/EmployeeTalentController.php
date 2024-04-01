@@ -15,8 +15,9 @@ class EmployeeTalentController extends Controller
     public function index()
     {
         //
-        $users = User::all();
+        $users = User::role('employees')->get();
         return view('employee.index',
+        compact('users')
         );
     }
 
@@ -38,15 +39,6 @@ class EmployeeTalentController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'user_id' => 'required',
-            'langue' => 'required',
-            'skill' => 'required',
-            'certification' => 'required',
-        ]);
-        EmployeeTalent::create($request->all());
-        return redirect()->route('employee.index')
-            ->with('success', 'EmployeeTalent created successfully.');
     }
 
     /**

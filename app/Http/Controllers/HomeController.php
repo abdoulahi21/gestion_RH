@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contrat;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        //je veux recuperer le nombre total des employes
+        $totalAgents = User::count();
+        //je veux recuperer le nombre total des employes qui on un contrat de type CDD
+        $Agents = User::whereHas('contrats', function($query){
+            $query->where('type_contrats', 'CDD');
+        })->count();
+        //je veux recuperer le nombre total des employes qui on un contrat de type CDI
+        $permanentAgents = User::whereHas('contrats', function($query){
+            $query->where('type_contrats', 'CDI');
+        })->count();
+        return view('home',compact('Agents', 'permanentAgents', 'totalAgents'));
+
+
     }
 }

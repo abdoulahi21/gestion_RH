@@ -97,4 +97,28 @@ class ContratController extends Controller
         return redirect()->route('contrat.index')
             ->with('success', 'Contrat deleted successfully');
     }
+
+   /* public function viewPDF()
+    {
+        $users = User::all();
+
+        $pdf = PDF::loadView('pdf.usersdetails', array('users' =>  $users))
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->stream();
+
+    }
+
+   public function downloadPDF()
+    {
+        $users = User::all();
+
+        $pdf = PDF::loadView('pdf.usersdetails', array('users' =>  $users))
+        ->setPaper('a4', 'portrait');
+
+        return $pdf->download('users-details.pdf');
+    }
+
+   */
+
 }

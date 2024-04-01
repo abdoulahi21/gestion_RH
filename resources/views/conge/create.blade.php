@@ -32,8 +32,8 @@
                                 <div class="col-sm-9">
                                     <select class="form-control" name="type_conge">
                                         <option>Maladie</option>
-                                        <option>CDD</option>
-                                        <option>Prestation de service</option>
+                                        <option>Evennement</option>
+                                        <option></option>
                                     </select>
                                     </select>
                                 </div>

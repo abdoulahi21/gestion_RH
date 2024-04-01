@@ -18,22 +18,36 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($conges as $conge)
-                        <tr>
-                            <td>{{$conge->id}}</td>
-                            <td>{{$conge->user->name}}</td>
-                            <td>{{$conge->type_conge}}</td>
-                            <td>{{$conge->date_debut}}</td>
-                            <td>{{$conge->date_fin}}</td>
-                            <td>{{$conge->status}}</td>
-                            <td>
-                                @if($conge->status == 'En attente')
-                                    <a href="{{ route('conge.accept', $conge->id) }}" class="btn btn-warning btn-sm">Valider</a>
+                    @if(Auth::user()->hasRole('Administrateurs'))
+                        @foreach($conges as $conge)
+                            <tr>
+                                <td>{{$conge->id}}</td>
+                                <td>{{$conge->user->name}}</td>
+                                <td>{{$conge->type_conge}}</td>
+                                <td>{{$conge->date_debut}}</td>
+                                <td>{{$conge->date_fin}}</td>
+                                <td>{{$conge->status}}</td>
+                                <td>
+                                    @if($conge->status == 'En attente' )
+                                         <a href="{{ route('conge.accept', $conge->id) }}" class="btn btn-warning btn-sm">Valider</a>
                                     <a href="{{ route('conge.refuse', $conge->id) }}" class="btn btn-danger btn-sm">Refuser</a>
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                        @else @if(Auth::user()->hasRole('employees'))
+                            @foreach($conges as $conge)
+                                <tr>
+                                    <td>{{$conge->id}}</td>
+                                    <td>{{$conge->user->name}}</td>
+                                    <td>{{$conge->type_conge}}</td>
+                                    <td>{{$conge->date_debut}}</td>
+                                    <td>{{$conge->date_fin}}</td>
+                                    <td>{{$conge->status}}</td>
+                                </tr>
+                            @endforeach
+                        @endif
+                        @endif
                     </tbody>
                 </table>
             </div>

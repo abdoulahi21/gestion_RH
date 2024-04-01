@@ -49,9 +49,24 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request): RedirectResponse
     {
-        $input = $request->all();
-        $input['password'] = Hash::make($request->password);
-        $user = User::create($input);
+        $user= User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'adresse' => $request->adresse,
+            'telephone' => $request->telephone,
+            'date_naissance' => $request->date_naissance,
+            'lieu_naissance' => $request->lieu_naissance,
+            'sexe' => $request->sexe,
+            'situation_matrimoniale' => $request->situation_matrimoniale,
+            'nombre_enfants' => $request->nombre_enfants,
+            'nationalite' => $request->nationalite,
+            'numero_identite' => $request->numero_identite,
+            'langue' => $request->langue,
+            'skill' => $request->skill,
+            'certification' => $request->certification,
+            'status' => 'active',
+        ]);
         $user->assignRole($request->roles);
 
         return redirect()->route('users.index')

@@ -13,6 +13,7 @@ class Absence extends Model
         'date_debut',
         'date_fin',
         'type_absences',
+        'status'
     ];
     public function user(){
         return $this->belongsTo(User::class);

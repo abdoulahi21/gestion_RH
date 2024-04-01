@@ -31,6 +31,9 @@ class User extends Authenticatable
         'nombre_enfants',
         'nationalite',
         'numero_identite',
+        'langue',
+        'skill',
+        'certification',
 
     ];
 

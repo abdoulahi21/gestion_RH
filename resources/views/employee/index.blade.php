@@ -13,11 +13,21 @@
                         <th>Langue</th>
                         <th>Skill</th>
                         <th>Certification</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-
+                    @foreach($users as $user)
+                        <tr>
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->langue }}</td>
+                            <td>{{ $user->skill }}</td>
+                            <td>{{ $user->certification }}</td>
+                            <td></td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

@@ -35,6 +35,9 @@ class StoreUserRequest extends FormRequest
             'nombre_enfants'=> 'required|integer',
             'nationalite'=> 'required|string|max:250',
             'numero_identite'=> 'required|string|max:250',
+            'langue' => 'required',
+            'skill' => 'required',
+            'certification' => 'required',
         ];
     }
 }

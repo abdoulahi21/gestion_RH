@@ -11,7 +11,8 @@
                 </div>
             </div>
             <div class="card-body">
-                <form class="form-sample">
+                <form class="form-sample"action="{{route('users.store')}}"  method="post" >
+                    @csrf
                     <p class="card-description">
                         Personal info
                     </p>
@@ -110,6 +111,38 @@
                                 <div class="col-sm-9">
                                     <input type="number" class="form-control" name="telephone"/>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Langue</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="skill"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="password" class="col-sm-4 col-form-label ">Skill</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control @error('skill') is-invalid @enderror" id="skill" name="skill">
+                                    @if ($errors->has('skill'))
+                                        <span class="text-danger">{{ $errors->first('skill') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-4 col-form-label ">Certifications</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control @error('certification') is-invalid @enderror" id="certification" name="certification">
+                                @if ($errors->has('certification'))
+                                    <span class="text-danger">{{ $errors->first('certification') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>

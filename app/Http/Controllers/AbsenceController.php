@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Absence;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class AbsenceController extends Controller
 {
@@ -14,8 +15,16 @@ class AbsenceController extends Controller
     public function index()
     {
         //
+        $roles=Role::all();
         $absences=Absence::all();
-        return view('absence.index',compact('absences'));
+        if (auth()->user()->hasRole('Administrateurs')) {
+            $absences = Absence::latest()->paginate(5);
+        } elseif (auth()->user()->hasRole('Gestionnaires')) {
+            $absences = Absence::latest()->paginate(5);
+        } elseif (auth()->user()->hasRole('employees')) {
+            $absences = Absence::where('user_id', auth()->user()->id)->latest()->paginate(5);
+        }
+        return view('absence.index',compact('absences'),compact('roles'));
     }
 
     /**
@@ -40,7 +49,13 @@ class AbsenceController extends Controller
             'date_fin' => 'required',
             'type_absences' => 'required',
         ]);
-        Absence::create($request->all());
+        $absence=new Absence();
+        $absence->user_id=$request->user_id;
+        $absence->date_debut=$request->date_debut;
+        $absence->date_fin=$request->date_fin;
+        $absence->type_absences=$request->type_absences;
+        $absence->status="En attente";
+        $absence->save();
         return redirect()->route('absence.index')
             ->with('success', 'Conge created successfully.');
 
@@ -94,5 +109,18 @@ class AbsenceController extends Controller
         $absence->delete();
         return redirect()->route('absence.index')
             ->with('success', 'Absence deleted successfully.');
+    }
+
+    public function accept(string $id)
+    {
+        Absence::find($id)->update(['status' => 'Accepté']);
+        return redirect()->route('absence.index')
+            ->with('success', 'Absence accepted successfully.');
+    }
+    public function refuse(string $id)
+    {
+        Absence::find($id)->update(['status' => 'Refusé']);
+        return redirect()->route('absence.index')
+            ->with('success', 'Absence refused successfully.');
     }
 }
