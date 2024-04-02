@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Role;
@@ -39,17 +40,53 @@ class UserController extends Controller
      */
     public function create(): View
     {
-        return view('users.create', [
+        return view('users.create',[
             'roles' => Role::pluck('name')->all()
         ]);
     }
-
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $user= User::create([
+       $request->validate([
+           'name' => 'required|string|max:250',
+           'email' => 'required|string|email:rfc,dns|max:250|unique:users,email',
+           'password' => 'required|string|min:8|confirmed',
+           'roles' => 'required',
+           'adresse'=> 'required|string|max:250',
+           'telephone'=> 'required|string|max:250',
+           'date_naissance'=> 'required|date',
+           'lieu_naissance'=> 'required|string|max:250',
+           'sexe'=> 'required|string|max:250',
+           'situation_matrimoniale'=> 'required|string|max:250',
+           'nombre_enfants'=> 'required|integer',
+           'nationalite'=> 'required|string|max:250',
+           'numero_identite'=> 'required|string|max:250',
+           'langue' => 'required',
+           'skill' => 'required',
+           'certification' => 'required',
+        ]);
+        $user= new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->adresse = $request->adresse;
+        $user->telephone = $request->telephone;
+        $user->date_naissance = $request->date_naissance;
+        $user->lieu_naissance = $request->lieu_naissance;
+        $user->sexe = $request->sexe;
+        $user->situation_matrimoniale = $request->situation_matrimoniale;
+        $user->nombre_enfants = $request->nombre_enfants;
+        $user->nationalite = $request->nationalite;
+        $user->numero_identite = $request->numero_identite;
+        $user->langue = $request->langue;
+        $user->skill = $request->skill;
+        $user->certification = $request->certification;
+        $user->status = 'active';
+        $user->assignRole($request->roles);
+        $user->save();
+       /* $user= User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -68,7 +105,7 @@ class UserController extends Controller
             'status' => 'active',
         ]);
         $user->assignRole($request->roles);
-
+       */
         return redirect()->route('users.index')
             ->withSuccess('New user is added successfully.');
     }

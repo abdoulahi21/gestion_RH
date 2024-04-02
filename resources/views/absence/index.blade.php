@@ -45,6 +45,10 @@
                                 <td>{{$absence->date_debut}}</td>
                                 <td>{{$absence->date_fin}}</td>
                                 <td>{{$absence->status}}</td>
+                                <td>
+                                    @if($absence->status != 'En attente' )
+                                        <a href="{{ route('absence.download-pdf', $absence->id) }}" class="btn btn-warning btn-sm">Export</a>
+                                    @endif
                             </tr>
                         @endforeach
                     @endif

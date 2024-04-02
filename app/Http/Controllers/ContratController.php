@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contrat;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class ContratController extends Controller
@@ -98,11 +99,12 @@ class ContratController extends Controller
             ->with('success', 'Contrat deleted successfully');
     }
 
-   /* public function viewPDF()
-    {
-        $users = User::all();
+   public function viewPDF()
 
-        $pdf = PDF::loadView('pdf.usersdetails', array('users' =>  $users))
+    {
+        $contrat = Contrat::all();
+
+        $pdf = PDF::loadView('contrat.pdf', array('contrat' =>  $contrat))
             ->setPaper('a4', 'portrait');
 
         return $pdf->stream();
@@ -111,14 +113,14 @@ class ContratController extends Controller
 
    public function downloadPDF()
     {
-        $users = User::all();
+        $contrat= Contrat::all();
 
-        $pdf = PDF::loadView('pdf.usersdetails', array('users' =>  $users))
+        $pdf = PDF::loadView('contrat.pdf', array('contrat' =>  $contrat))
         ->setPaper('a4', 'portrait');
 
-        return $pdf->download('users-details.pdf');
+        return $pdf->download('contrat-details.pdf');
     }
 
-   */
+
 
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Conge;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -126,4 +127,25 @@ class CongeController extends Controller
             return redirect()->route('conge.index')
                 ->with('success', 'Conge refused successfully');
         }
+
+    public function viewPDF()
+    {
+        $conge = Conge::all();
+
+        $pdf = PDF::loadView('conge.pdf', array('conge' =>  $conge))
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->stream();
+    }
+
+
+    public function downloadPDF()
+    {
+        $conge = Conge::all();
+
+        $pdf = PDF::loadView('conge.pdf', array('conge' =>  $conge))
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->download('conge-details.pdf');
+    }
 }

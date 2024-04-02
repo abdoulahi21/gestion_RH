@@ -25,13 +25,11 @@
                                <td>{{$contrat->date_debut}}</td>
                                <td>{{$contrat->date_fin}}</td>
                                <td>
-                                   <form action="{{ route('contrat.destroy', $contrat->id) }}" method="post">
+                                   <form action="{{ route('download-pdf', $contrat->id) }}" method="post">
                                        @csrf
-                                       @method('DELETE')
                                        @can('manage-contracts')
-                                           <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this product?');"><i class="bi bi-trash"></i> Delete</button>
+                                           <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to export this product?');"><i class="bi bi-trash"></i>Export</button>
                                        @endcan
-                                       <a href="{{ route('contrat.edit', $contrat->id) }}" class="btn btn-warning btn-sm"><i class="bi bi-eye"></i> Edit</a>
                                    </form>
                                </td>
                            </tr>

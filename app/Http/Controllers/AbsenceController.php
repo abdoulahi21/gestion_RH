@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Absence;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -122,5 +123,26 @@ class AbsenceController extends Controller
         Absence::find($id)->update(['status' => 'Refusé']);
         return redirect()->route('absence.index')
             ->with('success', 'Absence refused successfully.');
+    }
+
+    public function viewPDF()
+    {
+        $absence = Absence::all();
+
+        $pdf = PDF::loadView('absence.pdf', array('absence' =>  $absence))
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->stream();
+    }
+
+
+    public function downloadPDF()
+    {
+        $absence = Absence::all();
+
+        $pdf = PDF::loadView('absence.pdf', array('absence' =>  $absence))
+            ->setPaper('a4', 'portrait');
+
+        return $pdf->download('absence-details.pdf');
     }
 }

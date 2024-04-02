@@ -11,8 +11,9 @@
                 </div>
             </div>
             <div class="card-body">
-                <form class="form-sample"action="{{route('users.store')}}"  method="post" >
+                <form class="form-sample" action="{{route('users.store')}}"  method="post" >
                     @csrf
+
                     <p class="card-description">
                         Personal info
                     </p>
@@ -20,17 +21,19 @@
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Nom Complet</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="name"/>
-                                </div>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
+                                @if ($errors->has('name'))
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Adresse</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="adresse" />
-                                </div>
+                                <input type="text" class="form-control @error('adresse') is-invalid @enderror" id="adresse" name="adresse">
+                                @if ($errors->has('adresse'))
+                                    <span class="text-danger">{{ $errors->first('adresse') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -41,8 +44,8 @@
                                 <div class="col-sm-9">
                                     <select class="form-control" name="sexe">
                                         <option>Choisir</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
                                     </select>
                                 </div>
                             </div>
@@ -51,7 +54,10 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Date of Birth</label>
                                 <div class="col-sm-9">
-                                    <input class="form-control" type="date" name="date_naissance" placeholder="dd/mm/yyyy"/>
+                                    <input type="date" class="form-control @error('date_naissance') is-invalid @enderror" id="date_naissance" name="date_naissance">
+                                    @if ($errors->has('date_naissance'))
+                                        <span class="text-danger">{{ $errors->first('date_naissance') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -61,7 +67,10 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Lieu Naissance</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="lieu_naissance"/>
+                                    <input type="text" class="form-control @error('lieu_naissance') is-invalid @enderror" id="lieu_naissance" name="lieu_naissance">
+                                    @if ($errors->has('lieu_naissance'))
+                                        <span class="text-danger">{{ $errors->first('lieu_naissance') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -71,8 +80,8 @@
                                 <div class="col-sm-9">
                                     <select class="form-control" name="situation_matrimoniale">
                                         <option>Choisir</option>
-                                        <option>Célibataire</option>
-                                        <option>Marié</option>
+                                        <option value="celebataire">Célibataire</option>
+                                        <option value="marie">Marié</option>
                                     </select>
                                 </div>
                             </div>
@@ -83,15 +92,21 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Nombre Enfant</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" name="nombre_enfants"/>
+                                    <input type="text" class="form-control @error('nombre_enfants') is-invalid @enderror" id="nombre_enfants" name="nombre_enfants">
+                                    @if ($errors->has('nombre_enfants'))
+                                        <span class="text-danger">{{ $errors->first('nombre_enfants') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Nationnalité</label>
+                                <label class="col-sm-4 col-form-label">Nationalite</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="nationalite"/>
+                                    <input type="text" class="form-control @error('nationalite') is-invalid @enderror" id="nationalite" name="nationalite">
+                                    @if ($errors->has('nationalite'))
+                                        <span class="text-danger">{{ $errors->first('nationalite') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -99,9 +114,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">CNI</label>
+                                <label class="col-sm-4 col-form-label">CIN</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" name="numero_identite"/>
+                                    <input type="text" class="form-control @error('numero_identite') is-invalid @enderror" id="numero_identite" name="numero_identite">
+                                    @if ($errors->has('numero_identite'))
+                                        <span class="text-danger">{{ $errors->first('numero_identite') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -109,7 +127,10 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Telephone</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" name="telephone"/>
+                                    <input type="text" class="form-control @error('telephone') is-invalid @enderror" id="telephone" name="telephone">
+                                    @if ($errors->has('telephone'))
+                                        <span class="text-danger">{{ $errors->first('telephone') }}</span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -119,7 +140,17 @@
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Langue</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="skill"/>
+                                    @if ($errors->has('langue'))
+                                        <span class="text-danger">{{ $errors->first('langue') }}</span>
+                                    @else
+                                    <select class="form-control" name="langue">
+                                        <option>Choisir</option>
+                                        <option value="francais">Français</option>
+                                        <option value="anglais">Anglais</option>
+                                        <option value="espagnol">Espagnol</option>
+                                        <option value="allemand">Allemand</option>
+                                    </select>
+                                    @endif
                                 </div>
                             </div>
                         </div>
