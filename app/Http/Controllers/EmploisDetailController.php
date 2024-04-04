@@ -12,6 +12,8 @@ class EmploisDetailController extends Controller
     public function index()
     {
         //
+
+        return view('emplois.index');
     }
 
     /**
