@@ -12,7 +12,7 @@
                             </div>
                             <div class="col-sm-8">
                                 <div class="status-summary-chart-wrapper">
-                                    <canvas id="status-summary" ></canvas>
+                                    <canvas id="status-summary1" ></canvas>
                                 </div>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                             </div>
                             <div class="col-sm-8">
                                 <div class="status-summary-chart-wrapper">
-                                    <canvas id="status-summary"></canvas>
+                                    <canvas id="status-summary2"></canvas>
                                 </div>
                             </div>
                         </div>

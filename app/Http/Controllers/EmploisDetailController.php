@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmploiDetail;
 use Illuminate\Http\Request;
 
 class EmploisDetailController extends Controller
@@ -12,7 +13,7 @@ class EmploisDetailController extends Controller
     public function index()
     {
         //
-
+        //$emplois=EmploiDetail::all();
         return view('emplois.index');
     }
 
