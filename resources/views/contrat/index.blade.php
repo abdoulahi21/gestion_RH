@@ -27,10 +27,8 @@
                                <td>
                                    <form action="{{ route('download-pdf', $contrat->id) }}" method="post">
                                        @csrf
-                                       @can('manage-contracts')
-                                           <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to export this product?');"><i class="bi bi-trash"></i>Export</button>
-                                       @endcan
-                                   </form>
+                                       <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to export this product?');"><i class="bi bi-trash"></i>Export</button>
+                                 </form>
                                </td>
                            </tr>
                        @endforeach

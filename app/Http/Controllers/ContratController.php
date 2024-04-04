@@ -53,9 +53,6 @@ class ContratController extends Controller
     public function show(string $id)
     {
         //
-
-        $contrat = Contrat::find($id);
-        return redirect()->route('contrat.show', compact('contrat'));
     }
 
     /**

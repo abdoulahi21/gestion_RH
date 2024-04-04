@@ -20,4 +20,8 @@ class Conge extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function conge()
+    {
+        return $this->hasMany(Conge::class);
+    }
 }

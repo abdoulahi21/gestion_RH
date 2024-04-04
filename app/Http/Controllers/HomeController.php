@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conge;
 use App\Models\Contrat;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,7 +36,14 @@ class HomeController extends Controller
         $permanentAgents = User::whereHas('contrats', function($query){
             $query->where('type_contrats', 'CDI');
         })->count();
-        return view('home',compact('Agents', 'permanentAgents', 'totalAgents'));
+        //je veux recuperer le nommbre total de conge en attente
+         $congeAttente = User::whereHas('conge',function ($query){
+             $query->where('status','En attente');
+         })->count();
+        $congeAccepter = User::whereHas('conge',function ($query){
+            $query->where('status','Accepter');
+        })->count();
+        return view('home',compact('Agents', 'permanentAgents', 'totalAgents','congeAttente','congeAccepter'));
 
 
     }
