@@ -35,6 +35,7 @@ Route::resources([
     'contrat'=>\App\Http\Controllers\ContratController::class,
     'conge'=>\App\Http\Controllers\CongeController::class,
     'absence'=>\App\Http\Controllers\AbsenceController::class,
+    'emplois'=>\App\Http\Controllers\EmploisDetailController::class,
 ]);
 Route::get('/conge/accept/{id}',[\App\Http\Controllers\CongeController::class,'accept'])->name('conge.accept');
 Route::get('/conge/refuse/{id}',[\App\Http\Controllers\CongeController::class,'refuse'])->name('conge.refuse');

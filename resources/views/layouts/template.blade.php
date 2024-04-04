@@ -395,6 +395,9 @@
                             @canany(['manage-employees','view-employees'])
                             <li class="nav-item"> <a class="nav-link" href="{{route('employee.index')}}">Listes Employees</a></li>
                             @endcanany
+                            @canany(['manage-employees','view-employees'])
+                                <li class="nav-item"> <a class="nav-link" href="{{route('emplois.index')}}">Emplois</a></li>
+                            @endcanany
                             @canany(['manage-departement','view-departement'])
                                 <li class="nav-item"><a class="nav-link" href="{{route('departement.index')}}">Departements</a></li>
                             @endcanany
