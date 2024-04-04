@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('emplois_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('poste_id')->constrained('postes')->onDelete('cascade');
-            $table->foreignId('departement_id')->constrained('departements')->onDelete('cascade');
             $table->foreignId('contrat_id')->constrained('contrats')->onDelete('cascade');
-            $table->integer('salaire');
+            $table->foreignId('poste_id')->constrained('postes')->onDelete('cascade');
+            $table->string('salaire');
+            $table->string('date');
             $table->timestamps();
         });
     }

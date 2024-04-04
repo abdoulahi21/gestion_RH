@@ -40,6 +40,7 @@ class HomeController extends Controller
          $congeAttente = User::whereHas('conge',function ($query){
              $query->where('status','En attente');
          })->count();
+        //je veux recuperer le nommbre total de conge accepter
         $congeAccepter = User::whereHas('conge',function ($query){
             $query->where('status','Accepter');
         })->count();
