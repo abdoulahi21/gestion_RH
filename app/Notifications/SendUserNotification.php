@@ -37,7 +37,9 @@ class SendUserNotification extends Notification
         return (new MailMessage)
                     ->line('Bonjour vous venez d\'etre ajouter comme utilisateur standard dans notre application
                     web gestion des RH')
-                    ->action('Notification Action', url('/'))
+                    ->line('Login:votre adresse email')
+                    ->line('Mot de passe:passer1234')
+                    ->action('Me Connecter', url('welcome'))
                     ->line('Thank you for using our application!');
     }
 

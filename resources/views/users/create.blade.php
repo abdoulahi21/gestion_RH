@@ -21,19 +21,23 @@
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Nom Complet</label>
+                                <div class="col-sm-9">
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
                                 @if ($errors->has('name'))
                                     <span class="text-danger">{{ $errors->first('name') }}</span>
                                 @endif
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label">Adresse</label>
+                                <div class="col-sm-9">
                                 <input type="text" class="form-control @error('adresse') is-invalid @enderror" id="adresse" name="adresse">
                                 @if ($errors->has('adresse'))
                                     <span class="text-danger">{{ $errors->first('adresse') }}</span>
                                 @endif
+                            </div>
                             </div>
                         </div>
                     </div>

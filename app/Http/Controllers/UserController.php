@@ -48,72 +48,53 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-       $request->validate([
-           'name' => 'required|string|max:250',
-           'email' => 'required|string|email:rfc,dns|max:250|unique:users,email',
-           'password' => 'required|string|min:8|confirmed',
-           'roles' => 'required',
-           'adresse'=> 'required|string|max:250',
-           'telephone'=> 'required|string|max:250',
-           'date_naissance'=> 'required|date',
-           'lieu_naissance'=> 'required|string|max:250',
-           'sexe'=> 'required|string|max:250',
-           'situation_matrimoniale'=> 'required|string|max:250',
-           'nombre_enfants'=> 'required|integer',
-           'nationalite'=> 'required|string|max:250',
-           'numero_identite'=> 'required|string|max:250',
-           'langue' => 'required',
-           'skill' => 'required',
-           'certification' => 'required',
+        $request->validate([
+            'name' => 'required|string',
+            'adresse' => 'required|string',
+            'sexe' => 'required|in:male,female',
+            'date_naissance' => 'required|date',
+            'lieu_naissance' => 'required|string',
+            'situation_matrimoniale' => 'required|in:celebataire,marie',
+            'nombre_enfants' => 'required|numeric',
+            'nationalite' => 'required|string',
+            'numero_identite' => 'required|string',
+            'telephone' => 'required|string',
+            'langue' => 'required|in:francais,anglais,espagnol,allemand',
+            'skill' => 'required|string',
+            'certification' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|confirmed',
+            'roles' => 'required|array'
         ]);
-        $user= new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->adresse = $request->adresse;
-        $user->telephone = $request->telephone;
-        $user->date_naissance = $request->date_naissance;
-        $user->lieu_naissance = $request->lieu_naissance;
-        $user->sexe = $request->sexe;
-        $user->situation_matrimoniale = $request->situation_matrimoniale;
-        $user->nombre_enfants = $request->nombre_enfants;
-        $user->nationalite = $request->nationalite;
-        $user->numero_identite = $request->numero_identite;
-        $user->langue = $request->langue;
-        $user->skill = $request->skill;
-        $user->certification = $request->certification;
-        $user->status = 'active';
-        $user->assignRole($request->roles);
-        $user->save();
 
-        if($user){
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->adresse = $request->input('adresse');
+        $user->sexe = $request->input('sexe');
+        $user->date_naissance = $request->input('date_naissance');
+        $user->lieu_naissance = $request->input('lieu_naissance');
+        $user->situation_matrimoniale = $request->input('situation_matrimoniale');
+        $user->nombre_enfants = $request->input('nombre_enfants');
+        $user->nationalite = $request->input('nationalite');
+        $user->numero_identite = $request->input('numero_identite');
+        $user->telephone = $request->input('telephone');
+        $user->langue = $request->input('langue');
+        $user->skill = $request->input('skill');
+        $user->certification = $request->input('certification');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->status="Actif";
+        $user->save();
+        $user->assignRole($request->roles);
+
+        if( $user){
             $user->notify(new SendUserNotification());
         }
-       /* $user= User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'adresse' => $request->adresse,
-            'telephone' => $request->telephone,
-            'date_naissance' => $request->date_naissance,
-            'lieu_naissance' => $request->lieu_naissance,
-            'sexe' => $request->sexe,
-            'situation_matrimoniale' => $request->situation_matrimoniale,
-            'nombre_enfants' => $request->nombre_enfants,
-            'nationalite' => $request->nationalite,
-            'numero_identite' => $request->numero_identite,
-            'langue' => $request->langue,
-            'skill' => $request->skill,
-            'certification' => $request->certification,
-            'status' => 'active',
-        ]);
-        $user->assignRole($request->roles);
-       */
-        return redirect()->route('users.index')
-            ->withSuccess('New user is added successfully.');
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
+
 
     /**
      * Display the specified resource.
