@@ -41,11 +41,11 @@ Route::get('/conge/accept/{id}',[\App\Http\Controllers\CongeController::class,'a
 Route::get('/conge/refuse/{id}',[\App\Http\Controllers\CongeController::class,'refuse'])->name('conge.refuse');
 Route::get('/absence/accept/{id}',[\App\Http\Controllers\AbsenceController::class,'accept'])->name('absence.accept');
 Route::get('/absence/refuse/{id}',[\App\Http\Controllers\AbsenceController::class,'refuse'])->name('absence.refuse');
-Route::post('contrat/view-pdf', [\App\Http\Controllers\ContratController::class, 'viewPDF'])->name('view-pdf');
-Route::post('contrat/download-pdf', [ContratController::class, 'downloadPDF'])->name('download-pdf');
-Route::get('conge/download-pdf', [\App\Http\Controllers\CongeController::class, 'downloadPDF'])->name('conge.download-pdf');
-Route::get('conge/view-pdf', [\App\Http\Controllers\CongeController::class, 'viewPDF'])->name('conge.view-pdf');
-Route::get('absence/download-pdf', [\App\Http\Controllers\AbsenceController::class, 'downloadPDF'])->name('absence.download-pdf');
-Route::get('absence/view-pdf', [\App\Http\Controllers\AbsenceController::class, 'viewPDF'])->name('absence.view-pdf');
+Route::post('contrat/view-pdf/{id}', [\App\Http\Controllers\ContratController::class, 'viewPDF'])->name('view-pdf');
+Route::post('contrat/download-pdf/{id}', [ContratController::class, 'downloadPDF'])->name('download-pdf');
+Route::get('conge/download-pdf/{id}', [\App\Http\Controllers\CongeController::class, 'downloadPDF'])->name('conge.download-pdf');
+Route::get('conge/view-pdf/{id}', [\App\Http\Controllers\CongeController::class, 'viewPDF'])->name('conge.view-pdf');
+Route::get('absence/download-pdf/{id}', [\App\Http\Controllers\AbsenceController::class, 'downloadPDF'])->name('absence.download-pdf');
+Route::get('absence/view-pdf/{id}', [\App\Http\Controllers\AbsenceController::class, 'viewPDF'])->name('absence.view-pdf');
 Route::get('/user/desactiver/{id}',[\App\Http\Controllers\EmployeeTalentController::class,'desactiver'])->name('employee.desactiver');
 Route::get('/user/activer/{id}',[\App\Http\Controllers\EmployeeTalentController::class,'activer'])->name('employee.activer');

@@ -34,7 +34,11 @@ class AbsenceController extends Controller
     public function create()
     {
         //
-        $users=User::role('employees')->get();
+        if (auth()->user()->hasRole('employees')) {
+            $users = User::where('id', auth()->user()->id)->get();
+        } else {
+            $users = User::role('employees')->get();
+        }
         return view('absence.create',compact('users'));
     }
 
@@ -125,9 +129,9 @@ class AbsenceController extends Controller
             ->with('success', 'Absence refused successfully.');
     }
 
-    public function viewPDF()
+    public function viewPDF(string $id)
     {
-        $absence = Absence::all();
+        $absence = Absence::find($id);
 
         $pdf = PDF::loadView('absence.pdf', array('absence' =>  $absence))
             ->setPaper('a4', 'portrait');
@@ -136,9 +140,9 @@ class AbsenceController extends Controller
     }
 
 
-    public function downloadPDF()
+    public function downloadPDF(string $id)
     {
-        $absence = Absence::all();
+        $absence = Absence::find($id);
 
         $pdf = PDF::loadView('absence.pdf', array('absence' =>  $absence))
             ->setPaper('a4', 'portrait');

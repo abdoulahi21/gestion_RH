@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SendUserNotification extends Notification
+class CongeNotification extends Notification
 {
     use Queueable;
 
@@ -35,12 +35,8 @@ class SendUserNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('Bonjour vous venez d\'etre ajouter comme utilisateur standard dans notre application
-                    web gestion des RH')
-                    ->line('Login:votre adresse email')
-                    ->line('Mot de passe:passer1234')
-                    ->line('Une foie connecter vous pouvez modifier votre mot de passe')
-                    ->action('Me Connecter', url('welcome'))
+                    ->line('Bonjour,votre demande de congé a ete accepte avec success.')
+                    ->action('', url('welcome'))
                     ->line('Thank you for using our application!');
     }
 

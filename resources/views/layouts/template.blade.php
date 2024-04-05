@@ -416,6 +416,7 @@
                         </ul>
                     </div>
                 </li>
+                @canany(['create-role', 'edit-role', 'delete-role','create-user', 'edit-user', 'delete-user'])
                 <li class="nav-item nav-category">pages</li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
@@ -425,26 +426,17 @@
                     </a>
                     <div class="collapse" id="auth">
                         <ul class="nav flex-column sub-menu">
-                            @canany(['create-role', 'edit-role', 'delete-role'])
+
                                 <li class="nav-item"><a class="nav-link" href="{{ route('roles.index') }}">Gestion Roles</a></li>
-                            @endcanany
                         </ul>
                     </div>
                     <div class="collapse" id="auth">
                         <ul class="nav flex-column sub-menu">
-                            @canany(['create-user', 'edit-user', 'delete-user'])
                                 <li class="nav-item"><a class="nav-link" href="{{ route('users.index') }}">Gestion Users</a></li>
-                            @endcanany
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item nav-category">help</li>
-                <li class="nav-item">
-                    <a class="nav-link" href="http://bootstrapdash.com/demo/star-admin2-free/docs/documentation.html">
-                        <i class="menu-icon mdi mdi-file-document"></i>
-                        <span class="menu-title">Documentation</span>
-                    </a>
-                </li>
+                @endcanany
             </ul>
         </nav>
         <!-- partial -->
