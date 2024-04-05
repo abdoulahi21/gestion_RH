@@ -9,6 +9,8 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <h2 class="text-white ">{{ $totalAgents}}</h2>
+                                <h4 class="text-white">Actif:</h4>
+                                <h4 class="text-white">Inactif:</h4>
                             </div>
                             <div class="col-sm-8">
                                 <div class="status-summary-chart-wrapper">

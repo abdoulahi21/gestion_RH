@@ -32,7 +32,21 @@ class EmployeeTalentController extends Controller
         compact('users')
         );
     }
+    public function desactiver(string $id)
+    {
+        $user = User::find($id);
+        $user->status = "Inactif";
+        $user->save();
+        return redirect()->route('employee.index');
+    }
 
+    public function activer(string $id)
+    {
+        $user = User::find($id);
+        $user->status = "Actif";
+        $user->save();
+        return redirect()->route('employee.index');
+    }
     /**
      * Store a newly created resource in storage.
      */

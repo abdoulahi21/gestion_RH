@@ -44,7 +44,10 @@ class HomeController extends Controller
         $congeAccepter = User::whereHas('conge',function ($query){
             $query->where('status','Accepter');
         })->count();
-        return view('home',compact('Agents', 'permanentAgents', 'totalAgents','congeAttente','congeAccepter'));
+        //je veux recuperer les employees actif
+
+        return view('home',compact('Agents', 'permanentAgents',
+            'totalAgents','congeAttente','congeAccepter'));
 
 
     }

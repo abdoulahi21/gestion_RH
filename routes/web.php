@@ -47,3 +47,5 @@ Route::get('conge/download-pdf', [\App\Http\Controllers\CongeController::class, 
 Route::get('conge/view-pdf', [\App\Http\Controllers\CongeController::class, 'viewPDF'])->name('conge.view-pdf');
 Route::get('absence/download-pdf', [\App\Http\Controllers\AbsenceController::class, 'downloadPDF'])->name('absence.download-pdf');
 Route::get('absence/view-pdf', [\App\Http\Controllers\AbsenceController::class, 'viewPDF'])->name('absence.view-pdf');
+Route::get('/user/desactiver/{id}',[\App\Http\Controllers\EmployeeTalentController::class,'desactiver'])->name('employee.desactiver');
+Route::get('/user/activer/{id}',[\App\Http\Controllers\EmployeeTalentController::class,'activer'])->name('employee.activer');

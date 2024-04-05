@@ -61,9 +61,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Contrat::class);
     }
-    public function employee()
+    public function user()
     {
-        return $this->hasMany(EmployeeTalent::class);
+        return $this->hasMany(User::class);
     }
     public function conge()
     {
