@@ -54,6 +54,7 @@
                         @endif
                     </tbody>
                 </table>
+                {{$conges->links()}}
             </div>
         </div>
     </div>

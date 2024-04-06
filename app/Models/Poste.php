@@ -15,4 +15,9 @@ class Poste extends Model
     {
         return $this->belongsTo(Departement::class);
     }
+
+    public function emploi()
+    {
+        return $this->hasMany(EmploiDetail::class);
+    }
 }

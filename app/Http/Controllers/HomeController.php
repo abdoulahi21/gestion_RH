@@ -26,8 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //je veux recuperer le nombre total des employes
-        $totalAgents = User::count();
+        //je veux recuperer le nombre total des users avec le role employees
+        $totalAgents = User::role('employees')->count();
         //je veux recuperer le nombre total des employes qui on un contrat de type CDD
         $Agents = User::whereHas('contrats', function($query){
             $query->where('type_contrats', 'CDD');
@@ -45,9 +45,11 @@ class HomeController extends Controller
             $query->where('status','Accepter');
         })->count();
         //je veux recuperer les employees actif
-
+        $activeAgents = User::where('status','Actif')->count();
+        //je veux recuperer les employees inactif
+        $inactiveAgents = User::where('status','Inactif')->count();
         return view('home',compact('Agents', 'permanentAgents',
-            'totalAgents','congeAttente','congeAccepter'));
+            'totalAgents','congeAttente','congeAccepter','activeAgents','inactiveAgents'));
 
 
     }

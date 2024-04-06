@@ -14,4 +14,13 @@ class EmploiDetail extends Model
         'salaire',
         'date'
     ];
+    public function poste(){
+        return $this->belongsTo(Poste::class);
+    }
+    public function contrat(){
+        return $this->belongsTo(Contrat::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

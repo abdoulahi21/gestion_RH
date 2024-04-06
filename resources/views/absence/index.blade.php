@@ -55,6 +55,7 @@
                     @endif
                     </tbody>
                 </table>
+                {{$absences->links()}}
             </div>
         </div>
     </div>

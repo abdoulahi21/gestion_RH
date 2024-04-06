@@ -73,5 +73,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Absence::class);
     }
+    public function poste()
+    {
+        return $this->hasMany(Poste::class);
+    }
+    public function emploi()
+    {
+        return $this->hasMany(EmploiDetail::class);
+    }
+
 
 }

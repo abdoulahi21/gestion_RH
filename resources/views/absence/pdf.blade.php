@@ -1,71 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Details</title>
-
+    <title>Contrat</title>
     <style>
-        table {
-            width: 95%;
-            border-collapse: collapse;
-            margin: 50px auto;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            max-width: 600px;
+            padding: 20px;
         }
-
-        /* Zebra striping */
-        tr:nth-of-type(odd) {
-            background: #eee;
+        h1 {
+            text-align: center;
         }
-
-        th {
-            background: #3498db;
-            color: white;
+        p {
+            margin-bottom: 10px;
+        }
+        label {
             font-weight: bold;
         }
-
-        td,
-        th {
-            padding: 10px;
-            border: 1px solid #ccc;
-            text-align: left;
-            font-size: 18px;
-        }
-
-
     </style>
-
 </head>
-
 <body>
-
-<div style="width: 95%; margin: 0 auto;">
-
+<h1>Demande d'absence</h1>
+<div>
+    <label>Nom:</label>
+    <span>{{$absence->user->name}}</span>
 </div>
-
-<table style="position: relative; top: 50px;">
-    <thead>
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Date Of Joining</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach ($absence as $ct)
-        <tr>
-            <td data-column="First Name">{{ $ct->type_absence }}</td>
-            <td data-column="Last Name"></td>
-            <td data-column="Email" style="color: dodgerblue;">
-                {{ $ct->email }}
-            </td>
-        </tr>
-    @endforeach
-    </tbody>
-</table>
-
+<div>
+    <label>Date de début :</label>
+    <span>{{$absence->date_debut}}</span>
+</div>
+<div>
+    <label>Date de fin :</label>
+    <span>{{$absence->date_fin}}</span>
+</div>
+<div>
+    <label>Type d'absence:</label>
+    <span>{{$absence->type_absences}}</span>
+</div>
 </body>
-
 </html>
